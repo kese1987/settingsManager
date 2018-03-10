@@ -1,13 +1,9 @@
 package com.shareshipping.utils.settingsManager.impl;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.URI;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -21,9 +17,10 @@ public class SettingsManager implements ISettingsManager {
 
 	private HashMap<String, String> config = Maps.newHashMap();
 
+	@Override
 	public void parseSettings(String file) {
 
-		String path = getResourcePath(file);
+		String path = Utils.getResourcePath(file);
 
 		FileInputStream fis;
 		try {
@@ -54,33 +51,17 @@ public class SettingsManager implements ISettingsManager {
 		}
 	}
 
-	private String getResourcePath() {
-		try {
-			URI resourcePathFile = System.class.getResource("/RESOURCE_PATH").toURI();
-			String resourcePath = Files.readAllLines(Paths.get(resourcePathFile)).get(0);
-			URI rootURI = new File("").toURI();
-			URI resourceURI = new File(resourcePath).toURI();
-			URI relativeResourceURI = rootURI.relativize(resourceURI);
-			return relativeResourceURI.getPath();
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
-	public String getResourcePath(String folder) {
-
-		return (getResourcePath() != null) ? getResourcePath() + folder : null;
-	}
-
 	private boolean isValidInt(String value) {
 
 		return value.matches("^\\d+$");
 	}
 
+	@Override
 	public String getStringProperty(String key, String defaultRet) {
 		return (config.get(key) == null) ? defaultRet : config.get(key);
 	}
 
+	@Override
 	public int getIntProperty(String key, int defaultRet) {
 		String value = getStringProperty(key, String.valueOf(defaultRet));
 
