@@ -1,8 +1,9 @@
-package com.shareshipping.utils.settingsManager;
+package com.shareshipping.utils.settingsManager.guice;
 
 import static com.google.inject.Scopes.SINGLETON;
 
 import com.google.inject.AbstractModule;
+import com.shareshipping.utils.settingsManager.ISettingsManager;
 import com.shareshipping.utils.settingsManager.impl.SettingsManager;
 
 public class SettingsManagerModule extends AbstractModule {
