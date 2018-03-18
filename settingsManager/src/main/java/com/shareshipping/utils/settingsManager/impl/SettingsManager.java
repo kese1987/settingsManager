@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -71,6 +72,19 @@ public class SettingsManager implements ISettingsManager {
 		}
 
 		return defaultRet;
+	}
+
+	@Override
+	public <T> Optional<T> getOptionalProperty(String key, Class<T> clazz) {
+		String stringProperty = config.get(key);
+		try {
+			T castedObject = clazz.cast(stringProperty);
+			//in case of null object return an empty optional 
+			return Optional.ofNullable(castedObject);
+		} catch (ClassCastException e) {
+			//in case of exceptio
+			return Optional.empty();
+		}
 	}
 
 }

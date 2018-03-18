@@ -1,5 +1,7 @@
 package com.shareshipping.utils.settingsManager;
 
+import java.util.Optional;
+
 public interface ISettingsManager {
 
 	public abstract String getStringProperty(String key, String defaultRet);
@@ -8,4 +10,5 @@ public interface ISettingsManager {
 
 	public abstract void parseSettings(String file);
 
+	public abstract <T> Optional<T> getOptionalProperty(String key, Class<T> clazz);
 }
