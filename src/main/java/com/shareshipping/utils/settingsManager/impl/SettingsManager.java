@@ -23,9 +23,7 @@ public class SettingsManager implements ISettingsManager {
 
 		String path = Utils.getResourcePath(file);
 
-		FileInputStream fis;
-		try {
-			fis = new FileInputStream(path);
+		try (FileInputStream fis = new FileInputStream(path)) {
 
 			BufferedReader reader = new BufferedReader(new InputStreamReader(fis));
 
@@ -47,7 +45,6 @@ public class SettingsManager implements ISettingsManager {
 			reader.close();
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

@@ -8,6 +8,8 @@ import java.nio.file.Paths;
 
 public class Utils {
 
+	private Utils() {}
+	
 	public static String getResourcePath() {
 		try {
 			URI resourcePathFile = System.class.getResource("/RESOURCE_PATH").toURI();
@@ -28,8 +30,7 @@ public class Utils {
 
 	public static File[] listFiles(String folderPath, FilenameFilter pattern) {
 		File folder = new File(folderPath);
-		File[] listOfFiles = folder.listFiles(pattern);
-		return listOfFiles;
+		return folder.listFiles(pattern);
 
 	}
 
